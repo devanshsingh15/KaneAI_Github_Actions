@@ -1,0 +1,29 @@
+name: Run Sanity Tests on LambdaTest
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sanity-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Trigger Sanity Test on LambdaTest
+        env:
+          LT_AUTH: ${{ secrets.LT_AUTH }}
+        run: |
+          echo "Triggering sanity tests on LambdaTest..."
+
+          response=$(curl --silent --show-error --fail --location \
+          'https://test-manager-api.lambdatest.com/api/atm/v1/hyperexecute' \
+          --header "Content-Type: application/json" \
+          --header "Authorization: Basic $LT_AUTH" \
+          --data '{
+            "test_run_id": "01KNPB1VPYFMP2CT7V96S8RA0N",
+            "concurrency": 1,
+            "title": "KaneAI_Github_Actions"
+          }')
+
+          echo "Response received:"
+          echo "$response"
