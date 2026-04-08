@@ -14,11 +14,11 @@ jobs:
 
           response=$(curl --location 'https://test-manager-api.lambdatest.com/api/atm/v1/hyperexecute' \
           --header 'Content-Type: application/json' \
-          --header 'Authorization: Basic ZGV2YW5zaHNpbmdoOkxUX2tqbXp6SkNZdTcwa1JlRTdsd0UwdzJNT1hMV2cycTcyRU1oNjhCT290NmZZSTFj' \
+          --header 'Authorization: Basic ZGV2YW5zaHNpbmdobGFtYmRhdGVzdDpMVF83eUZnZ0Q1UmJuNEd2ZFRrNjZaNWxZUTVPbGVMWlBvMjFiYUg1Tmk4VXBFR3A0Vg==' \
           --data '{
-            "test_run_id": "01KM0QC4Q9S6D5HN7T8QPF257J",
+            "test_run_id": "01KNP8PVARXT79QJH3Z47MR8FQ",
             "concurrency": 1,
-            "title": "TR-Devansh"
+            "title": "KaneAI_Github_Actions"
           }')
 
           echo "Response: $response"
