@@ -6,19 +6,24 @@ on:
 jobs:
   sanity-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Trigger Sanity Test on LambdaTest
+        env:
+          LT_AUTH: ${{ secrets.LT_AUTH }}
         run: |
-          echo "Triggering sanity tests on LambdaTest"
+          echo "Triggering sanity tests on LambdaTest..."
 
-          response=$(curl --location 'https://test-manager-api.lambdatest.com/api/atm/v1/hyperexecute' \
-          --header 'Content-Type: application/json' \
-          --header 'Authorization: Basic ZGV2YW5zaHNpbmdobGFtYmRhdGVzdDpMVF83eUZnZ0Q1UmJuNEd2ZFRrNjZaNWxZUTVPbGVMWlBvMjFiYUg1Tmk4VXBFR3A0Vg==' \
+          response=$(curl --silent --show-error --fail --location \
+          'https://test-manager-api.lambdatest.com/api/atm/v1/hyperexecute' \
+          --header "Content-Type: application/json" \
+          --header "Authorization: Basic $LT_AUTH" \
           --data '{
             "test_run_id": "01KNP8PVARXT79QJH3Z47MR8FQ",
             "concurrency": 1,
             "title": "KaneAI_Github_Actions"
           }')
 
-          echo "Response: $response"
+          echo "Response received:"
+          echo "$response"
